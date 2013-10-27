@@ -23,12 +23,12 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        dataSource = new ClipperDataSource();
+        dataSource = new ClipperDataSource(this);
         List<ClipperItem> clipperLists = dataSource.findAll();
         ClipperItem clipper = clipperLists.get(0); 
         
         
-        Log.i("CLIPOER", clipper.getKey());
+        Log.i("CLIPPER", clipper.getKey());
         
     }
 
