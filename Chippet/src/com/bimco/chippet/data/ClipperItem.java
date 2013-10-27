@@ -4,10 +4,9 @@ import android.annotation.SuppressLint;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-
 /**
  * A single instance of the clipper
- *
+ * 
  */
 public class ClipperItem {
 	private String key;
@@ -36,7 +35,8 @@ public class ClipperItem {
 	 * @return an instance of this class from this method
 	 * 
 	 */
-	@SuppressLint("SimpleDateFormat") public static ClipperItem getNew() {
+	@SuppressLint("SimpleDateFormat")
+	public static ClipperItem getNew() {
 
 		// Locale can be used to create a data time stamp
 		Locale locale = new Locale("en_US");
@@ -49,16 +49,22 @@ public class ClipperItem {
 		// the format is sort-able from when it was created.
 		String pattern = "yyyy-MM-dd HH:mm:ss Z";
 		SimpleDateFormat formatter = new SimpleDateFormat(pattern);
-		
+
 		String key = formatter.format(new Date());
-		
+
 		// using the default no argument constructor
 		ClipperItem clipper = new ClipperItem();
-		
+
 		clipper.setKey(key);
 		clipper.setText("");
 		return clipper;
-		
+
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.getText();
 	}
 
 }
