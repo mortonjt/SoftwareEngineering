@@ -4,6 +4,11 @@ import android.annotation.SuppressLint;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+
+/**
+ * A single instance of the clipper
+ *
+ */
 public class ClipperItem {
 	private String key;
 	private String text;
