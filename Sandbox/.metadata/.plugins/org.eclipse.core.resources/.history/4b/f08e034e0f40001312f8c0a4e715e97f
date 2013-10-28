@@ -1,0 +1,152 @@
+package com.bimco.android.chippet.data;
+
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.*;
+import android.provider.BaseColumns;
+import android.util.Log;
+
+/**
+ * Singleton ClipboardStorage helper class
+ * See @link http://stackoverflow.com/questions/2493331/what-are-the-best-practices-for-sqlite-on-android
+ * @author Lawliet
+ *
+ */
+
+public class ClipboardStorage{
+        
+        /**
+         * Inner contract class for the table that stores the history of clipboard text content
+         */
+        public static abstract class ClipboardEntry implements BaseColumns{
+                public static final String TABLE_NAME = "entry";
+                public static final String COLUMN_NAME_TIME = "time";
+                public static final String COLUMN_NAME_CONTENT = "content";
+                public static final String COLUMN_NAME_GUID = "guid";
+                
+                /**
+                 * Private constructor prevents instantiation
+                 */
+                private ClipboardEntry(){
+                        //Does not allow instantiation
+                }
+                
+        }
+        /**
+         * A helper class to open a connection to the Database.
+         * @author Lawliet
+         *
+         */
+        private class ClipboardStorageOpenHelper extends SQLiteOpenHelper{
+                /**
+                 * Internal stuff
+                 */
+                private static final String SQL_CREATE_ENTRY =
+                                "CREATE TABLE " + ClipboardEntry.TABLE_NAME + " (" +
+                                ClipboardEntry.COLUMN_NAME_GUID + " TEXT PRIMARY KEY, "
+                                + ClipboardEntry.COLUMN_NAME_TIME + " INTEGER , "
+                                + ClipboardEntry.COLUMN_NAME_CONTENT + " TEXT"
+                                + ");";
+                
+                public static final int DATABASE_VERSION = 2;
+                public static final String DATABASE_NAME = "ClipboardEntry.db";
+                public static final String TAG = "ClipboardStorageOpenHelper";
+                
+                /**
+                 * Constructor. Pass it the Context object that is opening the database
+                 */
+                public ClipboardStorageOpenHelper (Context context){
+                        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+                }
+
+                
+                @Override
+                public void onCreate(SQLiteDatabase db) {
+                        Log.i(TAG, "Creating table");
+                        db.execSQL(SQL_CREATE_ENTRY);
+                }
+
+                @Override
+                public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+                        //Actually nothing to upgrade
+                        return;
+                }
+        }
+        
+        public static String sha1Hash( String toHash ){
+            String hash = null;
+            try {
+                MessageDigest digest = MessageDigest.getInstance( "SHA-1" );
+                digest.update( toHash.getBytes(), 0, toHash.length() );
+                hash = new BigInteger( 1, digest.digest() ).toString( 16 );
+            }
+            catch( NoSuchAlgorithmException e )
+            {
+                e.printStackTrace();
+            }
+            return hash;
+        }        
+        
+        /**
+         * Fields
+         */
+        public static final String TAG = "ClipboardStorage";
+        private ClipboardStorageOpenHelper ClipboardStorageOpen;
+        
+        /**
+         * Singleton design pattern code
+         */
+        private static ClipboardStorage instance;
+        
+        private ClipboardStorage(Context context){
+                ClipboardStorageOpen = new ClipboardStorageOpenHelper(context);
+        }
+        
+        public static ClipboardStorage getClipboardStorage(Context context){
+                if (instance == null){
+                        instance = new ClipboardStorage(context);
+                }
+                return instance;
+        }
+        
+        /**
+         * Query methods
+         * 
+         * Be sure to use these methods NOT in the main thread!
+         */
+        public void insertEntry(String text)
+        throws SQLiteException{
+                SQLiteDatabase db = ClipboardStorageOpen.getWritableDatabase();
+                long time = System.currentTimeMillis();
+                String guid = sha1Hash(((Long) time).toString() + text);
+                
+                ContentValues values = new ContentValues();
+                values.put(ClipboardEntry.COLUMN_NAME_GUID, guid);
+                values.put(ClipboardEntry.COLUMN_NAME_TIME, time);
+                values.put(ClipboardEntry.COLUMN_NAME_CONTENT,text);
+                
+                long rowID;
+                rowID = db.insert(ClipboardEntry.TABLE_NAME, null, values);
+                
+                if (rowID != -1) Log.i(TAG, "Clipboard entry stored in database.");
+                else Log.w(TAG, "Clipboard entry was NOT stored in database.");
+                
+                db.close();
+        }
+        
+        public Cursor getAllEntries()
+        throws SQLiteException{
+                SQLiteDatabase db = ClipboardStorageOpen.getReadableDatabase();
+                String[] columns = { ClipboardEntry.COLUMN_NAME_GUID, ClipboardEntry.COLUMN_NAME_TIME, ClipboardEntry.COLUMN_NAME_CONTENT, "OID AS _id" };
+                Cursor result = db.query(ClipboardEntry.TABLE_NAME,columns,null,null,null,null,ClipboardEntry.COLUMN_NAME_TIME + " DESC");
+                //db.close();
+                return result;
+        }
+        
+        
+}

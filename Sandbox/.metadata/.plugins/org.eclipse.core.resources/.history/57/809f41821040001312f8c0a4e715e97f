@@ -1,0 +1,5 @@
+package com.bimco.android.chippet;
+
+public class ClipboardListener {
+
+}
