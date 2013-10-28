@@ -1,4 +1,0 @@
-INDEX VERSION 1.126+C:\Users\Yu\Desktop\SoftwareEngineering\Sandbox\.metadata\.plugins\org.eclipse.jdt.core
-2516975822.index
-803212541.index
-316746756.index
