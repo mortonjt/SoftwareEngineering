@@ -1,0 +1,19 @@
+We want 3 classes:
+
+MainActivity
+- Encompasses everything
+
+Service
+-This monitors the copy function
+-Will have to look into service class
+
+GetText
+-Retrieve the text from the service
+-Will have to look at Clipboard manager
+
+Iteration 1 goals:
+1) Get copy function working
+2) Provide evidence (aka. print to log file)
+3) Filter out anything not text (pictures, video)
+
+
