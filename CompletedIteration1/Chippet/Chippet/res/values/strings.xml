@@ -7,7 +7,7 @@
     <string name="hello_world">Hello world!</string>
     
     <string name="notification_setting_desc">Notification</string>
-    <string name="text_count">Text Count</string>
+    <string name="copied">You copied this clip</string>
     <string name="copied_string_desc">Copied Text</string>
     <string name="hint">Hint</string>
     

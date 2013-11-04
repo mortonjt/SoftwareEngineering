@@ -11,12 +11,17 @@
         android:layout_gravity="center"
         android:text="@string/copied_string_desc" />
 
-    <TextView
+    <Button
         android:id="@+id/text_copied"
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"
-        android:textSize="30sp" >
-    </TextView>
+        android:layout_height="90dp"
+        android:textSize="20sp" >
+    </Button>
+
+    <Button
+        android:id="@+id/text_tester"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:textSize="20sp" />
 
 </LinearLayout>
