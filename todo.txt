@@ -16,5 +16,5 @@ Iteration 1 goals:
 2) Provide evidence (aka. print to log file)
 3) Filter out anything not text (pictures, video)
 4) Save a string
-
+5) Handle multiple copies and store them in memory
 
