@@ -1,48 +1,60 @@
 package com.bimco.chippet;
 
-import java.util.List;
+import com.bimco.chippet.data.ClipboardTextGetter;
+import com.bimco.chippet.greeting.InitialDescriptionView;
+import com.bimco.chippet.setting.NotificationSetting;
+import com.bimco.chippet.setting.NotificationSettingChangeActionImpl;
 
-import com.bimco.chippet.data.ClipperDataSource;
-import com.bimco.chippet.data.ClipperItem;
-
-import android.os.Bundle;
 import android.app.Activity;
-import android.app.ListActivity;
-import android.util.*;
-import android.view.Menu;
-import android.widget.ArrayAdapter;
+import android.os.Bundle;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.TextView;
 
-/**
- * This class represent the primary screen
- */
-public class MainActivity extends ListActivity {
+public class MainActivity extends Activity {
+    
+    private TextView mCopiedText;
+    private TextView mLengthText;
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        getActionBar().hide();
+        
+        new InitialDescriptionView(this).showIfInitialLaunch(); 
+        
+        mCopiedText = (TextView)findViewById(R.id.text_copied);
+       
 
-	private ClipperDataSource dataSource;
-	private List<ClipperItem> clipperList;
+        NotificationSettingChangeActionImpl action = new NotificationSettingChangeActionImpl(this);
+        final NotificationSetting notificationSetting = new NotificationSetting(this, action);
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-
-		dataSource = new ClipperDataSource(this);
-		
-		refreshDisplay();
-	}
-
-	private void refreshDisplay() {
-		clipperList = dataSource.findAll();
-		ArrayAdapter<ClipperItem> adapter = new ArrayAdapter<ClipperItem>(this,
-				R.layout.list_item_layout, clipperList);
-		setListAdapter(adapter);
-
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+        CheckBox notificationSettingCheckBox = (CheckBox)findViewById(R.id.checkBox_notification_setting);
+        notificationSettingCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                notificationSetting.setSetting(isChecked);
+            }
+        });
+        
+        notificationSettingCheckBox.setChecked(notificationSetting.getSetting());
+        notificationSetting.act();
+    }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        
+        ClipboardTextGetter textGetter = new ClipboardTextGetter(this);
+       
+        if (textGetter.getText() == null) {
+            mCopiedText.setText(R.string.hint);
+        } else {
+            mCopiedText.setText(textGetter.getText());
+        }
+    }
+    
 
 }

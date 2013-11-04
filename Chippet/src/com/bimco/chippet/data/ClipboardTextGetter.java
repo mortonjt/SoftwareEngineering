@@ -28,7 +28,8 @@ public class ClipboardTextGetter {
         if (text == null) {
             return 0;
         }
-
+        
+        
         return text.length();
     }
     
