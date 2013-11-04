@@ -1,4 +1,4 @@
-We want 3 classes:
+We want 3 classes to create a basic overlay:
 
 MainActivity
 - Encompasses everything
