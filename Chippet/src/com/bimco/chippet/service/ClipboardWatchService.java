@@ -30,12 +30,7 @@ public class ClipboardWatchService extends Service {
         mGetter.addOnClipboardChangeListener(listener);
     }
     
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mNotification.dismiss();
-    }
-    
+   
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent == null) {

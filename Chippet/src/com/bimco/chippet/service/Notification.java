@@ -1,7 +1,5 @@
 package com.bimco.chippet.service;
 
-import java.util.Map;
-
 import com.bimco.chippet.MainActivity;
 import com.bimco.chippet.R;
 
@@ -28,7 +26,7 @@ class Notification {
         Intent intent = new Intent(mContext, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
         
-        String message = (string == null) ? mContext.getString(R.string.hint) : string;
+        String message = (string == null) ? mContext.getString(R.string.hello_world) : string;
         
  
         @SuppressWarnings("deprecation")
@@ -42,8 +40,5 @@ class Notification {
 
     }
     
-    void dismiss() {
-        mNotificationManager.cancel(NOTIFICATION_ID);
-    }
-    
+ 
 }
