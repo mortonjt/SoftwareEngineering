@@ -9,7 +9,12 @@ import android.content.Context;
 public class ClipboardTextGetter {
 
 	private ClipboardManager mClipboardManager;
-
+	/*
+	 * We want to add a data structure to store the clips
+	 * 1) SharedPreferences
+	 * 2) Queue (*)
+	 * 3) Heap 
+	 */
 	public ClipboardTextGetter(Context context) {
 		mClipboardManager = (ClipboardManager) context
 				.getSystemService(Context.CLIPBOARD_SERVICE);
@@ -24,30 +29,19 @@ public class ClipboardTextGetter {
 			return null;
 		}
 		
-		// 
+		/* 
+		 *  Retrieves the most recent clip
+			Note: ClipboardManager only stores one clip
+		*/
 		ClipData clipData = mClipboardManager.getPrimaryClip();
 		Item itemAt = clipData.getItemAt(0);
 		return itemAt.getText().toString();
 	}
-
-	public int getTextLength() {
-		String text = getText();
-		if (text == null) {
-			return 0;
-		}
-		return text.length();
-	}
-
 	public void addOnClipboardChangeListener(
 			OnPrimaryClipChangedListener listener) {
+		/*
+		 * Every time clipboard has the primary clip changed, this is called
+		 */
 		mClipboardManager.addPrimaryClipChangedListener(listener);
-	}
-	
-	@Override
-	public String toString() {
-		return this.getText();
-	}
-
-	
-	
+	}	
 }

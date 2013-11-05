@@ -9,38 +9,22 @@ import android.util.Log;
 
 public class NotificationSetting {
 
-	static final String FILE_NAME = "notification_setting";
-	static final String KEY_NOTIFICATION_SETTING = "value";
-
-	private SharedPreferences mPreferences;
-
 	private Context mContext;
 
 	public NotificationSetting(Context context) {
-		mPreferences = (SharedPreferences) context.getSharedPreferences(
-				FILE_NAME, Context.MODE_PRIVATE);
-
 		mContext = context;
 	}
 
-	public void setSetting(boolean enabled) {
-		mPreferences.edit().putBoolean(KEY_NOTIFICATION_SETTING, enabled)
-				.commit();
-		act();
-	}
-
-	public boolean getSetting() {
-		return mPreferences.getBoolean(KEY_NOTIFICATION_SETTING, true);
-	}
-
 	public void act() {
-
 		actInEnabled();
-
 	}
 
 	public void actInEnabled() {
 		Log.d("tech_tec", "start service");
+		/*
+		 * This starts service
+		 * Question: Do we want to keep this in here, or move it to MainActivity
+		 */
 		mContext.startService(new Intent(mContext, ClipboardWatchService.class));
 	}
 

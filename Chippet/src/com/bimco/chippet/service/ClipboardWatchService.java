@@ -14,6 +14,10 @@ public class ClipboardWatchService extends Service {
     private Notification mNotification;
     private ClipboardTextGetter mGetter;
 
+    /*
+     * (non-Javadoc)
+     * @see android.app.Service#onBind(android.content.Intent)
+     */
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -23,7 +27,7 @@ public class ClipboardWatchService extends Service {
     public void onCreate() {
         super.onCreate();
         
-        mGetter = new ClipboardTextGetter(this);
+        mGetter = new ClipboardTextGetter(this); 
         mNotification = new Notification(this);
      
         OnClipboardChangeListenerImpl listener = new OnClipboardChangeListenerImpl(mGetter, mNotification);
@@ -32,12 +36,17 @@ public class ClipboardWatchService extends Service {
     
    
     @Override
+    /*
+     * (non-Javadoc)
+     * @see android.app.Service#onStartCommand(android.content.Intent, int, int)
+     Question: 
+     1) What is START_STICKY?
+     2) What does this do!?!!
+     */
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent == null) {
             return START_STICKY;
         }
-        
-   
         mNotification.show(mGetter.getText());
         
         return START_STICKY;

@@ -11,8 +11,8 @@ import android.content.Intent;
 
 
 class Notification {
-    
-    static int NOTIFICATION_ID = 315;
+
+	static int NOTIFICATION_ID = 315;
     
     private Context mContext;
     private NotificationManager mNotificationManager;
@@ -21,8 +21,13 @@ class Notification {
         mContext = context;
         mNotificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
     }
-    
+    /*
+     * 
+     */
     void show(String string) {
+    	/*
+    	 * Intent = something that can execute an action
+    	 */
         Intent intent = new Intent(mContext, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
         

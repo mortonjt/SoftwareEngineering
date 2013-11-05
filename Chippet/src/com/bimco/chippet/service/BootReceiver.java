@@ -6,7 +6,11 @@ import android.content.Intent;
 
 import com.bimco.chippet.setting.NotificationSetting;
 
-
+/**
+ * 
+ * @author Yu
+ * This can interact with any other application (e.g. Chrome, Text messenger)
+ */
 public class BootReceiver extends BroadcastReceiver {
 
     @Override
