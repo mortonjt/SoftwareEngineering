@@ -33,9 +33,15 @@ public class ClipboardTextGetter {
 		 *  Retrieves the most recent clip
 			Note: ClipboardManager only stores one clip
 		*/
-		ClipData clipData = mClipboardManager.getPrimaryClip();
-		Item itemAt = clipData.getItemAt(0);
-		return itemAt.getText().toString();
+		try{
+			ClipData clipData = mClipboardManager.getPrimaryClip();
+			Item itemAt = clipData.getItemAt(0);
+			return itemAt.getText().toString();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 	public void addOnClipboardChangeListener(
 			OnPrimaryClipChangedListener listener) {
