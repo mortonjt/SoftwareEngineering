@@ -18,3 +18,6 @@ Iteration 1 goals:
 4) Save a string
 5) Handle multiple copies and store them in memory
 
+Iteration 2 goals:
+1) Get primary listener a timer listener to indicate when the clipboard manager is updated
+2) Get queue implemented
