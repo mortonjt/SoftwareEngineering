@@ -16,6 +16,7 @@
         android:id="@+id/text_copied"
         android:layout_width="match_parent"
         android:layout_height="90dp"
+	android:maxLines="1"
         android:textSize="20sp" >
     </Button>
 
