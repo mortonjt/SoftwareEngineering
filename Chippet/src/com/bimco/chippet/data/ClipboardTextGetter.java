@@ -3,8 +3,6 @@ package com.bimco.chippet.data;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import com.bimco.chippet.service.OnClipboardChangeListenerImpl;
-
 import android.content.ClipData;
 import android.content.ClipData.Item;
 import android.content.ClipboardManager.OnPrimaryClipChangedListener;
