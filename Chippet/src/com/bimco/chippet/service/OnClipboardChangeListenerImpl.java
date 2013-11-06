@@ -9,16 +9,14 @@ import android.content.ClipboardManager.OnPrimaryClipChangedListener;
 class OnClipboardChangeListenerImpl implements OnPrimaryClipChangedListener {
     
     private ClipboardTextGetter mGetter;
-    private Notification mNotification;
     
-    public OnClipboardChangeListenerImpl(ClipboardTextGetter getter, Notification notification) {
+    public OnClipboardChangeListenerImpl(ClipboardTextGetter getter) {
         mGetter = getter;
-        mNotification = notification;
     }
 
     @Override
     public void onPrimaryClipChanged() {
-        mNotification.show(mGetter.getText());
+        //mNotification.show(mGetter.getText());
     }
     
 }

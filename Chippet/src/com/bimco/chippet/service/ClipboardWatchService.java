@@ -11,8 +11,9 @@ import android.os.IBinder;
 
 public class ClipboardWatchService extends Service {
     
-    private Notification mNotification;
-    private ClipboardTextGetter mGetter;
+/*    private Notification mNotification;
+*/
+	private ClipboardTextGetter mGetter;
 
     /*
      * (non-Javadoc)
@@ -28,9 +29,8 @@ public class ClipboardWatchService extends Service {
         super.onCreate();
         
         mGetter = new ClipboardTextGetter(this); 
-        mNotification = new Notification(this);
-     
-        OnClipboardChangeListenerImpl listener = new OnClipboardChangeListenerImpl(mGetter, mNotification);
+        
+        OnClipboardChangeListenerImpl listener = new OnClipboardChangeListenerImpl(mGetter);
         mGetter.addOnClipboardChangeListener(listener);
     }
     
@@ -47,8 +47,8 @@ public class ClipboardWatchService extends Service {
         if (intent == null) {
             return START_STICKY;
         }
-        mNotification.show(mGetter.getText());
-        
+        /*mNotification.show(mGetter.getText());
+        */
         return START_STICKY;
     }
 

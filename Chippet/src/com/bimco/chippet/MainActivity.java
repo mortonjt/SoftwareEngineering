@@ -1,6 +1,6 @@
 package com.bimco.chippet;
 import com.bimco.chippet.data.ClipboardTextGetter;
-import com.bimco.chippet.setting.NotificationSetting;
+//import com.bimco.chippet.setting.NotificationSetting;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -13,7 +13,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
 	//Data structure for all the copied text
-	ClipboardTextGetter textGetter;
+	ClipboardTextGetter textGetter = null;
 
 	// private TextView mCopiedText;
 	private Button mCopiedText;
@@ -36,7 +36,6 @@ public class MainActivity extends Activity {
 				Toast.makeText(MainActivity.this,
 						R.string.copied,
 						Toast.LENGTH_SHORT).show();
-
 			}
 		});
 		mCopiedTextTester = (Button)findViewById(R.id.text_tester);
@@ -54,7 +53,7 @@ public class MainActivity extends Activity {
 				ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 
 				ClipData clip = ClipData.newPlainText("label", "This is a tester to show the copy function of this button");
-				clipboard.setPrimaryClip(clip);//?? This will have to be replaced with a proper queue
+				clipboard.setPrimaryClip(clip);
 				/*Toast = pop up message*/ 
 				Toast.makeText(MainActivity.this,
 						R.string.copied,
@@ -62,13 +61,14 @@ public class MainActivity extends Activity {
 
 			}
 		});
+		
 		/*
 		 * Runs in the background
 		 * Notification is a service that is run in the notification menu 
 		 */
-		final NotificationSetting notificationSetting = new NotificationSetting(this);
+/*		final NotificationSetting notificationSetting = new NotificationSetting(this);
 		notificationSetting.act();
-
+*/
 	}
 
 	@Override
