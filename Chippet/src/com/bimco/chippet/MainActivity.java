@@ -2,6 +2,7 @@ package com.bimco.chippet;
 import com.bimco.chippet.data.ClipboardTextGetter;
 import com.bimco.chippet.service.ClipboardWatchService;
 
+
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -36,15 +37,20 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		textGetter = new ClipboardTextGetter(this);
+		
+		
 		mCopiedText = (Button)findViewById(R.id.text_copied);		
 		mCopiedText.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+				/*				
+				* ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 				ClipData clipData = clipboard.getPrimaryClip();
 				Item itemAt = clipData.getItemAt(0);
 				String s = itemAt.getText().toString();
+ 				*/
+				String s = textGetter.pop();
 				mCopiedText.setText(s);
 				//ClipData clip = ClipData.newPlainText("label", "This is a tester to show the copy function of this button");
 				//clipboard.setPrimaryClip(clip);//?? This will have to be replaced with a proper queue

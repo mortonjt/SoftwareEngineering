@@ -6,7 +6,7 @@ import com.bimco.chippet.data.ClipboardTextGetter;
 
 import android.content.ClipboardManager.OnPrimaryClipChangedListener;
 
-class OnClipboardChangeListenerImpl implements OnPrimaryClipChangedListener {
+public class OnClipboardChangeListenerImpl implements OnPrimaryClipChangedListener {
     
     private ClipboardTextGetter mGetter;
     
