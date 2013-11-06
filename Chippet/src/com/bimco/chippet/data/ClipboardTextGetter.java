@@ -1,5 +1,7 @@
 package com.bimco.chippet.data;
 
+import java.util.Queue;
+
 import android.content.ClipData;
 import android.content.ClipData.Item;
 import android.content.ClipboardManager.OnPrimaryClipChangedListener;
@@ -9,6 +11,7 @@ import android.content.Context;
 public class ClipboardTextGetter {
 
 	private ClipboardManager mClipboardManager;
+	private Queue<String> clipQueue;
 	/*
 	 * We want to add a data structure to store the clips
 	 * 1) SharedPreferences
@@ -18,6 +21,7 @@ public class ClipboardTextGetter {
 	public ClipboardTextGetter(Context context) {
 		mClipboardManager = (ClipboardManager) context
 				.getSystemService(Context.CLIPBOARD_SERVICE);
+		
 	}
 
 	/**
@@ -48,6 +52,10 @@ public class ClipboardTextGetter {
 		/*
 		 * Every time clipboard has the primary clip changed, this is called
 		 */
+		ClipData currentClip = mClipboardManager.getPrimaryClip();
+//		if(currentClip!=null){//Just for testing
+//			System.out.println(currentClip.getItemAt(0).getText());
+//		}
 		mClipboardManager.addPrimaryClipChangedListener(listener);
 	}	
 }

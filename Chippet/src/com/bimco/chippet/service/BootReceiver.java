@@ -16,7 +16,8 @@ public class BootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-    
+		context.startService(new Intent(context, ClipboardWatchService.class));		
+
  /*       NotificationSetting notificationSetting = new NotificationSetting(context);
         notificationSetting.act();
  */

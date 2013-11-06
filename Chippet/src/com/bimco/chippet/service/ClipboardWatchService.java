@@ -4,6 +4,9 @@ package com.bimco.chippet.service;
 import com.bimco.chippet.data.ClipboardTextGetter;
 
 import android.app.Service;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 
@@ -11,10 +14,9 @@ import android.os.IBinder;
 
 public class ClipboardWatchService extends Service {
     
-/*    private Notification mNotification;
-*/
-	private ClipboardTextGetter mGetter;
-
+	/*Since the ClipboardManager is global
+	this is the only variable that we have to change*/
+	private ClipboardManager mClipboardManager;
     /*
      * (non-Javadoc)
      * @see android.app.Service#onBind(android.content.Intent)
@@ -27,26 +29,29 @@ public class ClipboardWatchService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        
-        mGetter = new ClipboardTextGetter(this); 
-        
-        OnClipboardChangeListenerImpl listener = new OnClipboardChangeListenerImpl(mGetter);
-        mGetter.addOnClipboardChangeListener(listener);
+
+ 		mClipboardManager = (ClipboardManager) this.getSystemService(Context.CLIPBOARD_SERVICE);        
+
+//        mGetter = new ClipboardTextGetter(this);         
+//        OnClipboardChangeListenerImpl listener = new OnClipboardChangeListenerImpl(mGetter);
+//        mGetter.addOnClipboardChangeListener(listener);
     }
     
-   
+    
     @Override
     /*
      * (non-Javadoc)
      * @see android.app.Service#onStartCommand(android.content.Intent, int, int)
      Question: 
-     1) What is START_STICKY?
+     1) What is START_STICKY?: Determines what should happen if service is restarted
      2) What does this do!?!!
      */
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent == null) {
             return START_STICKY;
         }
+        ClipData clip = ClipData.newIntent("Intent",intent);
+        mClipboardManager.setPrimaryClip(clip);
         /*mNotification.show(mGetter.getText());
         */
         return START_STICKY;
