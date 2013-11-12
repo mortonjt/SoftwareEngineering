@@ -10,6 +10,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 
+/**
+ * 
+ * @author jamie
+ * This is the service
+ */
 
 
 public class ClipboardWatchService extends Service {
@@ -25,7 +30,9 @@ public class ClipboardWatchService extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
-    
+    /**
+     * Creates clipboard service
+     */
     @Override
     public void onCreate() {
         super.onCreate();
@@ -39,12 +46,8 @@ public class ClipboardWatchService extends Service {
     
     
     @Override
-    /*
-     * (non-Javadoc)
-     * @see android.app.Service#onStartCommand(android.content.Intent, int, int)
-     Question: 
-     1) What is START_STICKY?: Determines what should happen if service is restarted
-     2) What does this do!?!!
+    /**
+     * Starts services
      */
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent == null) {

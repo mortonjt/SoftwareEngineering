@@ -23,13 +23,10 @@ public class MainActivity extends Activity {
 	//private TextView mCopiedText;
 	private Button mCopiedText;
 	//private Button mCopiedTextTester;
-	/*
+	/**
 	 * Basic ideas:
 	 * 1) The clipboard data structure is only being called HERE
 	 * 2) The global variable that ties everything together is the clipboard manager
-	 * 
-	 * (non-Javadoc)
-	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,10 +73,7 @@ public class MainActivity extends Activity {
 
 
 	@Override
-	/*
-	 * (non-Javadoc)
-	 * @see android.app.Activity#onResume()
-	 * 
+	/**
 	 * This occurs when application is in the foreground (aka. not in the background)
 	 */
 	protected void onResume() {
