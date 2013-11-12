@@ -1,0 +1,1 @@
+We implemented the module design pattern for our clipboard service
