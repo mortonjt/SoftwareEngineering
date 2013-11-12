@@ -21,3 +21,8 @@ Iteration 1 goals:
 Iteration 2 goals:
 1) Get primary listener a timer listener to indicate when the clipboard manager is updated
 2) Get queue implemented
+3) We should definitely try to get ahead by any means since our checklist is finished.
+    Here are some iteration three requirements that we could get started on once the listener is finished:
+    - allowing the user to determine the number of strings they want to have saved at any given time
+    - creating the floating menu
+    - working on making chippet quick and not detrimental to other activity or the battery
