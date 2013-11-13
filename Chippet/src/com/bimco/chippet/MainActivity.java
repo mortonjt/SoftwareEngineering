@@ -1,7 +1,6 @@
 package com.bimco.chippet;
 import java.util.Calendar;
 
-import com.bimco.chippet.data.ClipboardTextGetter;
 import com.bimco.chippet.service.ClipboardWatchService;
 
 import android.app.Activity;

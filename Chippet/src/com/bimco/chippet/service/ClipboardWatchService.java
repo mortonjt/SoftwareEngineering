@@ -6,7 +6,6 @@ import java.util.Set;
 
 import com.bimco.chippet.MainActivity;
 import com.bimco.chippet.R;
-import com.bimco.chippet.data.ClipboardTextGetter;
 
 import android.app.Service;
 import android.content.ClipData;
