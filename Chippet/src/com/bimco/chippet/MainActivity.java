@@ -15,6 +15,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ClipData.Item;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
 		mCopiedText = (Button)findViewById(R.id.text_copied);
 		mCopiedText.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -45,16 +47,12 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		/*AlarmManager service = (AlarmManager) context
-				.getSystemService(Context.ALARM_SERVICE);
-		*/
 		Intent i = new Intent(getApplicationContext(), ClipboardWatchService.class);
 		PendingIntent pending = PendingIntent.getBroadcast(getApplicationContext(), 0, i,
 				PendingIntent.FLAG_CANCEL_CURRENT);
 		Calendar cal = Calendar.getInstance();
 		// Start 30 seconds after boot completed
-		cal.add(Calendar.SECOND, 1);
-		
+		cal.add(Calendar.SECOND, 1);		
 		// Fetch every second
 		// InexactRepeating allows Android to optimize the energy consumption
 		AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
