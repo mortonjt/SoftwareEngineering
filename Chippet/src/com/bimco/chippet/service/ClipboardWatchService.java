@@ -26,7 +26,26 @@ import android.widget.Toast;
 /**
  * 
  * @author jamie
- * This is the service
+ * This is the service that copies clips and stores them into a data structure
+ * 
+ * There are 3 different data structures being used here
+ * 1) A queue to keep track of the order in which clips were copied
+ * 2) A set to make sure that duplicate words aren't copied
+ * 3) A SharedPreferences object to store the clipboard words
+ * 
+ * Now there are two different ways to access the clipboard
+ * 1) Obtain access to the ClipboardWatchService
+ * (e.g. 
+ * private final String SERVICE ="com.bimco.chippet.service.ClipboardWatchService";
+ * )
+ * 
+ * 2) Obtain access to the SharedPreferences
+ * (e.g.
+ * clipPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+ * )
+ * 
+ * Things to consider
+ * 1) The SharedPreferences is created only in onCreate.  Will we want to save/load SharedPreferences?
  */
 
 
