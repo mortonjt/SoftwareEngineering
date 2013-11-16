@@ -1,6 +1,7 @@
 package com.bimco.chippet.service;
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -78,6 +79,7 @@ public class ClipboardWatchService extends Service {
  		clipQueue = new LinkedList<String>();
  		clipPreferences = PreferenceManager.getDefaultSharedPreferences(this);
     }
+
     /**
      * Adds clip to the data structure
      */

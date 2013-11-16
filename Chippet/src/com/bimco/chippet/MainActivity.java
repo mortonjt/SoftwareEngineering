@@ -1,5 +1,8 @@
 package com.bimco.chippet;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Map;
 
 import com.bimco.chippet.service.ClipboardWatchService;
 
@@ -12,8 +15,11 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.ClipData.Item;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,8 +30,6 @@ public class MainActivity extends Activity {
 //private TextView mCopiedText;
 	private static final long REPEAT_TIME = 1000 * 1;
 	private Button mCopiedText;
-	private final String SERVICE ="com.bimco.chippet.service.ClipboardWatchService";
-	//private Button mCopiedTextTester;
 	/**
 	 * Basic ideas:
 	 * 1) The clipboard data structure is only being called HERE
@@ -40,6 +44,13 @@ public class MainActivity extends Activity {
 		mCopiedText.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				SharedPreferences clipPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+				Map<String,?> clipmap = clipPreferences.getAll();
+				ArrayList<String> clips = new ArrayList<String>((Collection<? extends String>) clipmap.values());
+				for(int i = 0 ; i<clips.size();i++){
+					String s = clips.get(i);
+		    		Log.e("List",s);
+				}
 				Toast.makeText(MainActivity.this,
 						R.string.copied,
 						Toast.LENGTH_SHORT).show();
