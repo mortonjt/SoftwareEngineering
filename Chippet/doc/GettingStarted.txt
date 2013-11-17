@@ -1,0 +1,14 @@
+Installation
+
+Make sure that Android SDK 4.3 or higher is installed
+
+
+To open the app in Eclipse
+
+1) Open the project
+2) Click Virtual Device Manager and create a virtual device
+3) Run the project as a Android Application
+
+Once the emulator is open, then the copy function can be tested.
+
+To copy items onto the clipboard on the phone, highlight a word until the cut/copy command shows up.  Click on copy and the you'll see in the log file in eclipse that the word has been copied.
