@@ -22,3 +22,15 @@ Opening a new project in Eclipse.
 3) Android -> Android Project From Existing Code
 4) Find where the code is saved and select the top file
 4) Click Finish
+
+Creating a Virtual Device Manager (VDM)
+
+1) Window -> Android SDK Manager
+2) Make sure that all desired Android API's and tools are installed (atleast 4.3 or higher)
+3) Once all Android API's and tools are installed it is possible to create a VIrtual Device Manager
+4) Window -> Android Virtual Device Manager
+5) Click New in the top right of window pane
+6) Fill in following information including AVD Name, Device, Target, CPU, etc.
+7) Once all information is filled in click OK at the bottom of the panel
+8) Close out of Android Virtual Device Manager, and now able to run MainActiviity.java
+
