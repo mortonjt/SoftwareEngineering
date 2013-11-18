@@ -12,3 +12,12 @@ To open the app in Eclipse
 Once the emulator is open, then the copy function can be tested.
 
 To copy items onto the clipboard on the phone, highlight a word until the cut/copy command shows up.  Click on copy and the you'll see in the log file in eclipse that the word has been copied.
+
+
+Opening a new project in Eclipse.
+
+1) Start Eclispe
+2) File -> New -> Project
+3) Android -> Android Project From Existing Code
+4) Find where the code is saved and select the top file
+4) Click Finish
