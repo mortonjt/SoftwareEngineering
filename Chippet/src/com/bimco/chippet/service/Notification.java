@@ -40,6 +40,4 @@ public class Notification {
 		// Builds the notification and issues it.
 		mNotifyMgr.notify(mNotificationId, mBuilder.build());
 	}
-	
-
 }

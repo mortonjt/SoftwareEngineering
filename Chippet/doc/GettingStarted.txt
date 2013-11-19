@@ -12,3 +12,25 @@ To open the app in Eclipse
 Once the emulator is open, then the copy function can be tested.
 
 To copy items onto the clipboard on the phone, highlight a word until the cut/copy command shows up.  Click on copy and the you'll see in the log file in eclipse that the word has been copied.
+To access the clipboard, pull down on the notification bar and select the app icon
+Copied clips will be displayed in the menu 
+
+Opening a new project in Eclipse.
+
+1) Start Eclispe
+2) File -> New -> Project
+3) Android -> Android Project From Existing Code
+4) Find where the code is saved and select the top file
+4) Click Finish
+
+Creating a Virtual Device Manager (VDM)
+
+1) Window -> Android SDK Manager
+2) Make sure that all desired Android API's and tools are installed (atleast 4.3 or higher)
+3) Once all Android API's and tools are installed it is possible to create a VIrtual Device Manager
+4) Window -> Android Virtual Device Manager
+5) Click New in the top right of window pane
+6) Fill in following information including AVD Name, Device, Target, CPU, etc.
+7) Once all information is filled in click OK at the bottom of the panel
+8) Close out of Android Virtual Device Manager, and now able to run MainActiviity.java
+
