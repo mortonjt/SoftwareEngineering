@@ -24,7 +24,8 @@ public class Notification {
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mContext)
 			    .setSmallIcon(R.drawable.ic_notification)
 			    .setContentTitle("My notification")
-			    .setContentText("Hello World!");
+			    .setContentText("Hello World!")
+			    .setOngoing(true);
 		
 		Intent resultIntent = new Intent(mContext, MainActivity.class);
 	
