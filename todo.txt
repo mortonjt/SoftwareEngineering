@@ -26,3 +26,11 @@ Iteration 2 goals:
     - allowing the user to determine the number of strings they want to have saved at any given time
     - creating the floating menu
     - working on making chippet quick and not detrimental to other activity or the battery
+
+
+Todo:
+
+UML diagram
+
+Rethink about how to create class diagrams: Think about it in terms of inheritance, instances, etc.
+Rethink use case diagrams. Another uses relationship?
