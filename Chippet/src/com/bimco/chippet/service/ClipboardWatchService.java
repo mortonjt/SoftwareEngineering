@@ -1,14 +1,11 @@
 package com.bimco.chippet.service;
 
-
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Set;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Stack;
 
-import com.bimco.chippet.MainActivity;
-import com.bimco.chippet.R;
+import com.bimco.chippet.ClipListFragment;
 
 import android.app.Service;
 import android.content.ClipData;
@@ -17,123 +14,67 @@ import android.content.ClipboardManager;
 import android.content.ClipboardManager.OnPrimaryClipChangedListener;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
+import android.content.SyncContext;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
-
-/**
- * 
- * @author jamie
- * This is the service that copies clips and stores them into a data structure
- * 
- * There are 3 different data structures being used here
- * 1) A queue to keep track of the order in which clips were copied
- * 2) A set to make sure that duplicate words aren't copied
- * 3) A SharedPreferences object to store the clipboard words
- * 
- * Now there are two different ways to access the clipboard
- * 1) Obtain access to the ClipboardWatchService
- * (e.g. 
- * private final String SERVICE ="com.bimco.chippet.service.ClipboardWatchService";
- * )
- * 
- * 2) Obtain access to the SharedPreferences
- * (e.g.
- * clipPreferences = PreferenceManager.getDefaultSharedPreferences(this);
- * )
- * 
- * Things to consider
- * 1) The SharedPreferences is created only in onCreate.  Will we want to save/load SharedPreferences?
- */
-
+import android.widget.ListView;
 
 public class ClipboardWatchService extends Service {
-    
-	/*Since the ClipboardManager is global
-	this is the only variable that we have to change*/
-	private ClipboardManager mClipboardManager;
-	private OnPrimaryClipChangedListener mClipListener;
-	private Set<String> clipSet;
-	private Queue<String> clipQueue;
-	private SharedPreferences clipPreferences;
-	private int numElements = 3;  //This needs to be initalized by config file 
-	/*
-     * (non-Javadoc)
-     * @see android.app.Service#onBind(android.content.Intent)
-     */
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
-    /**
-     * Creates clipboard service
-     */
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        clipSet = new HashSet<String>(20);
- 		mClipboardManager = (ClipboardManager) this.getSystemService(Context.CLIPBOARD_SERVICE);
- 		clipQueue = new LinkedList<String>();
- 		clipPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-    }
+	private Notification mNotification;
+	public static ClipboardManager mClipboardManager;
 
-    /**
-     * Adds clip to the data structure
-     */
-    public void addClip(String cliptext){
-    	if(!clipSet.contains(cliptext)){
-    		clipSet.add(cliptext);
-    		clipQueue.add(cliptext);
-    		Editor editor = clipPreferences.edit();
-			editor.putString(cliptext, cliptext);
-			Log.e("Adding string",cliptext);
-			if(clipQueue.size()>numElements){
-    			String removed = clipQueue.poll();
-    			clipSet.remove(removed);
-    			editor.remove(removed);
-    			Log.e("Removing string",removed);
-    		}
-    		editor.commit();
-    		
-    	}
-    }
+	public static ArrayList<String> clips = new ArrayList<String>();;
 
-    private void savePreferences(String key, String value) {
-    	SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-    	Editor editor = sharedPreferences.edit();
-    	editor.putString(key, value);
-    	editor.commit();	
-    }
+	@Override
+	public IBinder onBind(Intent intent) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    @Override
-    /**
-     * Starts services (aka. checks clipboard every second)
-     */
-    public int onStartCommand(Intent intent, int flags, int startId) {
-    	try{
-    		if ((mClipboardManager.hasPrimaryClip())) {
-    			ClipData.Item item = mClipboardManager.getPrimaryClip().getItemAt(0);
-    			String cliptext = item.getText().toString();
-    			//if(!clipSet.contains(cliptext)){
-    			addClip(cliptext);    			
-    		}else{
-    			ClipData clip = ClipData.newPlainText("simple text","Hello, World!");
-    	        mClipboardManager.setPrimaryClip(clip);
-    		}
-    	}
-    	catch(Exception e){
-    		Log.e("Caught","Exception");
-    		e.printStackTrace();
-    		System.exit(0);
-    	}
-    	if (intent == null) {
-            return START_STICKY;
-        }
-        
-        return START_STICKY;
-    }
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		
+		mNotification = new Notification(this);
+		mClipboardManager = (ClipboardManager) this
+				.getSystemService(Context.CLIPBOARD_SERVICE);
+
+		mClipboardManager
+				.addPrimaryClipChangedListener(new PrimaryClipChangedListener());
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+	}
+
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		Log.e("Judy", "Service Reached");
+
+
+		mNotification.show();
+		if (intent == null) {
+			return START_STICKY;
+		}
+
+		return START_STICKY;
+	}
+
+	private class PrimaryClipChangedListener implements
+			OnPrimaryClipChangedListener {
+
+		@Override
+		public void onPrimaryClipChanged() {
+			Log.e("Judy", "copyclip reached");
+			ClipData.Item item = mClipboardManager.getPrimaryClip()
+					.getItemAt(0);
+			String s = item.getText().toString();
+			ClipListFragment.allClips.add(s);
+			for (int i = 0; i < ClipListFragment.allClips.size(); i++) {
+				Log.e("Added clipes " + i, ClipListFragment.allClips.get(i));
+			}
+		}
+	}
 
 }
