@@ -28,7 +28,7 @@ public class ClipListFragment extends ListFragment {
 	 */
 	public static List<String> allClips = new ArrayList<String>();
 	
-
+	public static int numClips = 1;
 	// Instead of using a constructor, I am using a static method 
 	// to create a ClipListFragment
 	public static ClipListFragment newInstance() {
@@ -45,11 +45,21 @@ public class ClipListFragment extends ListFragment {
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.list_fragment, R.id.text);
         
 		setListAdapter(adapter);
-        Collections.reverse(allClips);
-		adapter.addAll(allClips);
 		Collections.reverse(allClips);
+		
+		if(allClips.size()<numClips){
+		adapter.addAll(allClips);
+		}
+		else{
+			for(int i =0; i<numClips; i++){
+				adapter.add(allClips.get(i));
+			}
+		}
+		//Collections.reverse(allClips);
+		Log.e("Num Clips", "" + numClips);
         
 	}
+	
 	
 
 
