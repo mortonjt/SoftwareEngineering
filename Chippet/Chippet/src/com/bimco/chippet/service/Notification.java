@@ -1,5 +1,6 @@
 package com.bimco.chippet.service;
 
+import com.bimco.chippet.ClipListFragment;
 import com.bimco.chippet.MainActivity;
 import com.bimco.chippet.R;
 
@@ -23,8 +24,8 @@ public class Notification {
 	void show(){
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mContext)
 			    .setSmallIcon(R.drawable.ic_notification)
-			    .setContentTitle("My notification")
-			    .setContentText("Hello World!")
+			    .setContentTitle("Chippet")
+			    .setContentText("Copy and Paste")
 			    .setOngoing(true);
 		
 		Intent resultIntent = new Intent(mContext, MainActivity.class);

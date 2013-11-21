@@ -6,12 +6,13 @@
  
     <TextView
         android:id="@+id/text"
-        android:layout_width="match_parent"
+        android:layout_width="294dp"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
         android:paddingBottom="5sp"
+        android:paddingLeft="10sp"
         android:singleLine="true"
-        android:textSize="22sp"
         android:text="@string/text"
-        android:ellipsize="end" />
+        android:textSize="22sp" />
  
 </LinearLayout>

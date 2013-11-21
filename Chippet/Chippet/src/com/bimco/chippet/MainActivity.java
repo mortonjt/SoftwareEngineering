@@ -51,7 +51,7 @@ public class MainActivity extends Activity {
 		final CharSequence[] items = {"2", "4", "8", "10"};
 		Log.e("Seeting", "Setting");
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Make your selection");
+		builder.setTitle("Choose how many clips to display:");
 		builder.setItems(items, new DialogInterface.OnClickListener() {
 			
 			@Override

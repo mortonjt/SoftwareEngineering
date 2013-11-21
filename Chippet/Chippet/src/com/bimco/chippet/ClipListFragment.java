@@ -57,6 +57,7 @@ public class ClipListFragment extends ListFragment {
 		}
 		//Collections.reverse(allClips);
 		Log.e("Num Clips", "" + numClips);
+		Collections.reverse(allClips);
         
 	}
 	
@@ -72,8 +73,11 @@ public class ClipListFragment extends ListFragment {
 		String s = (String) (getListAdapter().getItem(position));
 		ClipData clip = ClipData.newPlainText("label", s);
 		ClipboardWatchService.mClipboardManager.setPrimaryClip(clip);
+		Collections.reverse(allClips);
 		allClips.remove(position);
-
+		Collections.reverse(allClips);
+		
+		getActivity().moveTaskToBack(true);
 	}
 
 }
