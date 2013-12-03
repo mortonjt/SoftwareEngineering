@@ -8,8 +8,6 @@ import com.bimco.chippet.service.ClipboardWatchService;
 
 import android.app.ListFragment;
 import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;

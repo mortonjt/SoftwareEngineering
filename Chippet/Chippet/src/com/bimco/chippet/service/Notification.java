@@ -1,6 +1,5 @@
 package com.bimco.chippet.service;
 
-import com.bimco.chippet.ClipListFragment;
 import com.bimco.chippet.MainActivity;
 import com.bimco.chippet.R;
 

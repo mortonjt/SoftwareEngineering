@@ -1,23 +1,16 @@
 package com.bimco.chippet.service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
-
 import com.bimco.chippet.ClipListFragment;
 
 import android.app.Service;
 import android.content.ClipData;
-import android.content.ClipData.Item;
 import android.content.ClipboardManager;
 import android.content.ClipboardManager.OnPrimaryClipChangedListener;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SyncContext;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.ListView;
 
 public class ClipboardWatchService extends Service {
 	private Notification mNotification;
