@@ -1,3 +1,17 @@
 Description
 
-Chippet is a copy & paste application that continually runs in the background of your phone. As you copy and cut, Chippet keeps a tab of each clip. You are able to change the amount of clips (the default is one clip) that Chippet stores in the settings menu. 
+Chippet is a copy & paste application that continually runs in the background of your phone.
+
+As you copy and cut, Chippet keeps a tab of each clip that you create.
+Chippet works with all applications on your phone but can only stores clips that are text.
+
+You are able to change the amount of clips that Chippet stores in the settings menu.
+The default amount of clips that Chippet will save is one. The user can choose up to ten clips to be saved.
+
+To paste, you can simply open Chippet and choose one of the saved clips to paste wherever you'd like.
+The most recent clips are saved and the older ones are deleted ones Chippet reaches its maximum amount of saved clips.
+
+Chippet will not slow down your phone or use excessive amounts of battery.
+
+So no more of having only one clip to copy and paste at a time.
+Try Chippet and make your life a bit easier!
